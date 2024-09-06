@@ -1,0 +1,1 @@
+<button type="button" class="btn btn-sm btn-link float-right float-end inline-create-button"><span class="la la-plus"></span>{{$field['inline_create']['add_button_label'] ?? trans('backpack::crud.add')}}</button>
