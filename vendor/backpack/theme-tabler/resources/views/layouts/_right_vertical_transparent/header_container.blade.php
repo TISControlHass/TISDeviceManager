@@ -1,1 +1,0 @@
-@extends(backpack_view('layouts._vertical_transparent.header_container'))

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Log;
 // use Alert;
 use Prologue\Alerts\Facades\Alert as Alert;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\TextUI\XmlConfiguration\Logging\Logging;
+
 // import Alert facade
 
 
@@ -37,31 +39,31 @@ class ApplianceController extends Controller
         // check offlline programing is correct
         $channels =  ApplianceChannels::all();
         foreach ($channels as $channel) {
-            if ($channel->device_id <= 0 || $channel->channel_number == null) {
+            if ($channel->appliance_id <= 0 || $channel->channel_number == null) {
                 // Set a success message in the session
-                Alert::add('error', 'Error publishing appliances, missing device or channel number on ' . $channel->channel_name)->flash();
+                Alert::add('error', 'Error publishing appliances, missing device or channel number on ' . $channel->applianceId->appliance_name . $channel->channel_name)->flash();
+                Log::info('Error publishing appliances, missing device or channel number on ' . $channel->applianceId->appliance_name . $channel->channel_name);
                 return Redirect::to(backpack_url('appliance-channels'));
             }
         }
-
         $server_address = Settings::where("key", "server_address")->first()->value;
-        $appliance_channels = ApplianceChannels::select('appliance_id', 'device_id', 'channel_number', 'channel_type', 'channel_name')->get();
-
+        $appliance_channels = ApplianceChannels::select('appliance_id', 'channel_number', 'channel_name')->get();
         $appliance_channels->transform(function ($channel) {
-            $channel->appliance = $channel->applianceId->appliance_name;
+            $channel->appliance_name = $channel->appliance->appliance_name;
             $channel->is_protected = $channel->applianceId->is_protected;
-            $channel->device_mac = Device::find($channel->device_id)->mac;
+            $channel->device_id = $channel->device->device_address;
+            $channel->gateway = $channel->device->gateway;
             $channel->appliance_type = $channel->applianceId->applianceType->appliance_type_name;
             $channel->appliance_class = $channel->applianceId->appliance_class;
-            $channel->floor = $channel->applianceId->floorId->floor_name;
-            $channel->room = $channel->applianceId->roomId->room_name;
             unset($channel->applianceId);
+            unset($channel->appliance);
+            unset($channel->device);
             return $channel;
         });
 
-        $grouped_channels = $appliance_channels->groupBy('appliance');
+        $grouped_channels = $appliance_channels->groupBy('appliance_name');
 
-        $devices = Device::select('device_type', 'device_name', 'mac')->get();
+        $devices = Device::select('device_type', 'device_name', 'device_address')->get();
 
         $devices->transform(function ($device) {
             $device->device_type = $device->deviceType->device_type_name;

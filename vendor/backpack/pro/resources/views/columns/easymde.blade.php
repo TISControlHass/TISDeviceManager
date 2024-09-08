@@ -1,1 +1,0 @@
-@include('backpack.pro::columns.markdown')

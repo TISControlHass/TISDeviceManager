@@ -1,1 +1,0 @@
-@include('crud::columns.select_multiple')
