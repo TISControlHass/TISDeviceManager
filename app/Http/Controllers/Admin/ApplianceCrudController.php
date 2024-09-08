@@ -40,6 +40,7 @@ class ApplianceCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // set columns from db columns.
+        CRUD::addButtonFromModelFunction('top', 'publish', 'publish');
         CRUD::column('device_id')->type('select2')->entity('deviceId')->attribute("device_name")->model('App\Models\Device');
         CRUD::column('appliance_type')->type('select2')->entity('applianceType')->attribute("appliance_type_name")->model('App\Models\ApplianceType');
     }
@@ -67,7 +68,6 @@ class ApplianceCrudController extends CrudController
             'attribute' => 'device_name',
             'model' => \App\Models\Device::class,
         ]);
-
     }
 
     /**

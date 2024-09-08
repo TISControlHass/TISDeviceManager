@@ -46,7 +46,14 @@ class ApplianceChannels extends Model
     {
         return $this->hasOne(Appliance::class, 'id', 'appliance_id');
     }
-
+    public function appliance()
+    {
+        return $this->belongsTo(Appliance::class, 'appliance_id', 'id');
+    }
+    public function device()
+    {
+        return $this->hasOneThrough(Device::class, Appliance::class, 'id', 'id', 'appliance_id', 'device_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
