@@ -5,10 +5,10 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
-use App\Models\Channel;
 
 /**
  * Represents a device model.
+ *
  * @property int $id The unique identifier of the device.
  * @property string $device_type fk to the devices_types table.
  * @property string $device_name The name of the device.
@@ -16,20 +16,22 @@ use App\Models\Channel;
  * @property string $gateway The gateway of the device.
  */
 class Device extends Model
-
 {
     use CrudTrait;
+
     // Define the table associated with the model
     protected $table = 'devices';
 
     // Define the primary key column name
     protected $primaryKey = 'id';
+
     protected $fillable = [
-        "device_name",
-        "device_type",
-        "device_address",
-        "gateway",
+        'device_name',
+        'device_type',
+        'device_address',
+        'gateway',
     ];
+
     // model events
     protected static function boot()
     {
@@ -58,7 +60,9 @@ class Device extends Model
 
         static::deleting(function ($device) {
             // TODO: delete all related appliances
-            $device->appliances()->delete();
+            $device->appliances()->each(function ($channel) {
+                $channel->delete();
+            });
             $virtualDevice = $device->virtualDevice;
             // TODO: make virtual device work
             // if ($virtualDevice) {
@@ -76,7 +80,7 @@ class Device extends Model
         });
 
         static::updated(function ($device) {
-            Log::info("Device updated... syncing virtual device");
+            Log::info('Device updated... syncing virtual device');
             // TODO: make virtual device work
             // $device->sync_virtual_device();
         });
@@ -103,9 +107,10 @@ class Device extends Model
     {
         return $this->hasMany(DefaultAppliance::class, 'device_type', 'device_type');
     }
+
     public function deviceType()
     {
-        return $this->belongsTo(DeviceType::class, "device_type");
+        return $this->belongsTo(DeviceType::class, 'device_type');
     }
 
     // TODO: make virtual device work
@@ -117,11 +122,11 @@ class Device extends Model
     // BackPack CRUD Buttons
     public function scan_devices($crud = false)
     {
-        return '<a class="btn btn-primary" href="' . route('devices.scan') . '" data-toggle="tooltip" title="Scan the network for devices."><i class="la la-search "></i> Scan Devices</a>';
+        return '<a class="btn btn-primary" href="'.route('devices.scan').'" data-toggle="tooltip" title="Scan the network for devices."><i class="la la-search "></i> Scan Devices</a>';
     }
 
     public function auto_create_appliances($crud = false)
     {
-        return '<a class="btn btn-primary" href="' . route('appliances.auto-create') . '" data-toggle="tooltip" title="Auto create appliances from the devices."><i class="la la-plus "></i> Auto Create Appliances</a>';
+        return '<a class="btn btn-primary" href="'.route('appliances.auto-create').'" data-toggle="tooltip" title="Auto create appliances from the devices."><i class="la la-plus "></i> Auto Create Appliances</a>';
     }
 }
