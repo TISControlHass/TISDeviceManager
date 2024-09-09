@@ -2,26 +2,24 @@
 
 namespace App\Models;
 
-
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ApplianceChannels;
-use PhpMqtt\Client\Facades\MQTT;
 use Illuminate\Support\Facades\Log;
 
 /**
  * Represents an appliance model.
+ *
  * @property int $id The unique identifier of the appliance.
  * @property string $appliance_name The name of the appliance.
  * @property string $appliance_type fk to the appliance_types table.
  * @property string $device_id fk to the devices table.
  * @property string $appliance_class The class of the appliance.
  * @property bool $is_protected Whether the appliance is protected.
-
  */
 class Appliance extends Model
 {
     use CrudTrait;
+
     // Define the table associated with the model
     protected $table = 'appliances';
 
@@ -34,8 +32,9 @@ class Appliance extends Model
         'appliance_name',
         'appliance_type',
         'appliance_class',
-        'is_protected'
+        'is_protected',
     ];
+
     // Define any relationships or additional methods here
     // boot function
     protected static function boot()
@@ -64,9 +63,12 @@ class Appliance extends Model
 
         static::updated(function ($appliance) {
             // remove all appliance channels
-            $appliance->applianceChannels->delete();
+            $appliance->applianceChannels->each(function ($channel) {
+                $channel->delete();
+            });
             // create new channels
             $applianceType = $appliance->applianceType;
+
             $channelsData = $applianceType->defaultApplianceChannels->map(function ($defaultApplianceChannel) use ($appliance) {
                 return [
                     'appliance_id' => $appliance->id,
@@ -110,7 +112,7 @@ class Appliance extends Model
 
     public function publish()
     {
-        return '<a class="btn btn-primary" href="' . route('appliances.publish') . '" data-toggle="tooltip" title="Publish appliances to homeassistant."><i class="la la-home"> </i> Publish to HomeAssistant</a>';
+        return '<a class="btn btn-primary" href="'.route('appliances.publish').'" data-toggle="tooltip" title="Publish appliances to homeassistant."><i class="la la-home"> </i> Publish to HomeAssistant</a>';
     }
 
     public function defaultApplianceChannels()
