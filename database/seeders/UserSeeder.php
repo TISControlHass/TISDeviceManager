@@ -8,16 +8,14 @@ use App\Models\User;
 class UserSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Seed the application's database.
      *
      * @return void
      */
     public function run()
     {
-        User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@mail.com',
-            'password' => bcrypt('1234'),
-        ]);
+        User::truncate();
+        // Create 10 users using the factory
+        User::factory()->count(1)->create();
     }
 }
