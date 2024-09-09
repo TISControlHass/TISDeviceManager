@@ -9,3 +9,4 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 .env
+.sqlite
