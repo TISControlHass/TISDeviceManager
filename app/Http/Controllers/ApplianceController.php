@@ -112,12 +112,15 @@ class ApplianceController extends Controller
                 //for each device, get the device type and create the default appliances
 
                 $defaultAppliances = $device->deviceType->defaultAppliances;
+
                 foreach ($defaultAppliances as $appliance) {
+                    // get appliance type name
+                    $applianceTypeName = ApplianceType::find($appliance->appliance_type)->appliance_type_name;
                     // create a new appliance
                     $appliance = Appliance::create(
                         [
                             'device_id' => $device->id,
-                            'appliance_name' => $device->device_name . '_' . $appliance->appliance_identifier,
+                            'appliance_name' => $device->device_name . '_' . $applianceTypeName . '_' . $appliance->appliance_identifier,
                             'appliance_type' => $appliance->appliance_type,
                             'appliance_class' => null,
                             'is_protected' => $appliance->appliancetype->is_protected,
