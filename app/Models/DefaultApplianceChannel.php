@@ -28,6 +28,7 @@ class DefaultApplianceChannel extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
+    // TODO: remove channel number
     protected $fillable = ['appliance_type_id', 'channel_name', 'channel_number'];
     // protected $hidden = [];
 
