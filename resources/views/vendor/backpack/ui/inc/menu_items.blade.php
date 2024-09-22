@@ -2,11 +2,6 @@
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-stream nav-icon"></i>
         {{ trans('backpack::base.dashboard') }}</a></li>
 
-<x-backpack::menu-dropdown title="Home Structure" icon="la la-home nav-icon">
-    <x-backpack::menu-dropdown-item title="Floors" icon="la la-building" :link="backpack_url('floors')" />
-    <x-backpack::menu-dropdown-item title="Rooms" icon="la la-bed" :link="backpack_url('rooms')" />
-</x-backpack::menu-dropdown>
-
 <x-backpack::menu-dropdown title="Devices" icon="la la-clipboard-list">
     <x-backpack::menu-dropdown-item title="virtual devices" icon="la la-code" :link="backpack_url('virtual-device')" />
     <x-backpack::menu-dropdown-item title="Devices" icon="la la-server" :link="backpack_url('device')" />
@@ -28,5 +23,3 @@
 {{-- <x-backpack::menu-item title="Users" icon="la la-user" :link="backpack_url('user')" /> --}}
 
 {{-- <x-backpack::menu-item title="Devices Channels" icon="la la-toggle-on" :link="backpack_url('channel')" /> --}}
-
-<x-backpack::menu-item title="Appliances" icon="la la-question" :link="backpack_url('appliance')" />
