@@ -7,7 +7,7 @@ use App\Models\Appliance;
 use App\Models\Device;
 use App\Models\ApplianceChannels;
 use App\Models\ApplianceType;
-use App\Models\DefaultAppliance;
+use App\Models\DefaultApplianceChannel;
 use App\Models\Settings;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -16,8 +16,6 @@ use Illuminate\Support\Facades\Log;
 // use Alert;
 use Prologue\Alerts\Facades\Alert as Alert;
 use Illuminate\Support\Facades\DB;
-use PHPUnit\TextUI\XmlConfiguration\Logging\Logging;
-
 // import Alert facade
 
 
@@ -110,33 +108,44 @@ class ApplianceController extends Controller
 
             foreach ($devices as $device) {
                 //for each device, get the device type and create the default appliances
-
                 $defaultAppliances = $device->deviceType->defaultAppliances;
-
-                foreach ($defaultAppliances as $appliance) {
+                foreach ($defaultAppliances as $defaultAppliance) {
                     // get appliance type name
-                    $applianceTypeName = ApplianceType::find($appliance->appliance_type)->appliance_type_name;
+                    $applianceTypeName = ApplianceType::find($defaultAppliance->appliance_type)->appliance_type_name;
                     // create a new appliance
                     $appliance = Appliance::create(
                         [
                             'device_id' => $device->id,
-                            'appliance_name' => $device->device_name . '_' . $applianceTypeName . '_' . $appliance->appliance_identifier,
-                            'appliance_type' => $appliance->appliance_type,
+                            'appliance_name' => $device->device_name . '_' . $applianceTypeName . '_' . $defaultAppliance->appliance_identifier,
+                            'appliance_type' => $defaultAppliance->appliance_type,
                             'appliance_class' => null,
-                            'is_protected' => $appliance->appliancetype->is_protected,
+                            'is_protected' => $defaultAppliance->appliancetype->is_protected,
                         ]
                     );
+                    // now create appliance channels using DefaultApplianceChannels
+                    $defaultApplianceChannels = DefaultApplianceChannel::where('appliance_type_id', $defaultAppliance->appliance_type)->get();
+                    foreach ($defaultApplianceChannels as $defaultApplianceChannel) {
+                        ApplianceChannels::updateOrCreate(
+                            [
+                                'appliance_id' => $appliance->id,
+                                'channel_name' => $defaultApplianceChannel->channel_name,
+                            ],
+                            [
+                                'channel_number' => $defaultAppliance->appliance_identifier,
+                            ]
+                        );
+                    }
                 }
             }
 
             DB::commit();
-
             Alert::add('success', 'Successfully auto created appliances')->flash();
             return back()->with('success', 'Successfully auto created appliances');
         } catch (\Throwable $th) {
             DB::rollback();
 
             Alert::add('error', 'Error creating appliances ' . str($th))->flash();
+            Log::error('Error creating appliances ' . str($th));
             return back()->with('error', 'Error creating appliances');
         }
     }

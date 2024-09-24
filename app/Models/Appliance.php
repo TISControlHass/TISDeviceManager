@@ -46,8 +46,6 @@ class Appliance extends Model
                 // Get the appliance type
                 $applianceType = $appliance->applianceType;
                 // check protection
-                // TODO: implement protection
-
                 $channelsData = $applianceType->defaultApplianceChannels->map(function ($defaultApplianceChannel) use ($appliance) {
                     return [
                         'appliance_id' => $appliance->id,
@@ -55,10 +53,8 @@ class Appliance extends Model
                         'channel_number' => null, // Assuming you need to explicitly set this
                     ];
                 })->toArray();
-
                 ApplianceChannels::insert($channelsData);
             }
-            // }
         );
 
         static::updated(function ($appliance) {
@@ -112,7 +108,7 @@ class Appliance extends Model
 
     public function publish()
     {
-        return '<a class="btn btn-primary" href="'.route('appliances.publish').'" data-toggle="tooltip" title="Publish appliances to homeassistant."><i class="la la-home"> </i> Publish to HomeAssistant</a>';
+        return '<a class="btn btn-primary" href="' . route('appliances.publish') . '" data-toggle="tooltip" title="Publish appliances to homeassistant."><i class="la la-home"> </i> Publish to HomeAssistant</a>';
     }
 
     public function defaultApplianceChannels()
