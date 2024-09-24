@@ -19,11 +19,15 @@ class ApplianceTypeSeeder extends Seeder
             "rgb",
             "ac",
             "floor_heating",
-            "shutter",
-            "shutter_with_position",
-            "sensor",
+            "cover",
+            "cover_with_position",
             "binary_sensor",
             "select",
+            "noise_sensor",
+            "eco2_sensor",
+            "tvoc_sensor",
+            "humidity_sensor",
+            "co_sensor",
         ];
 
         // first empty the table

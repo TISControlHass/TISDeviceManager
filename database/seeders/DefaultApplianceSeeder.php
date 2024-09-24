@@ -1715,7 +1715,7 @@ class DefaultApplianceSeeder extends Seeder
                     $appliance = DefaultAppliance::create(
                         [
                             'device_type' => $device_type->id,
-                            'appliance_type' => ApplianceType::where('appliance_type_name', 'shutter_with_position')->first()->id,
+                            'appliance_type' => ApplianceType::where('appliance_type_name', 'cover_with_position')->first()->id,
                             'appliance_identifier' => $i,
                         ]
                     );

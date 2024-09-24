@@ -42,11 +42,11 @@ class DefaultApplianceChannelsSeeder extends Seeder
             "floor_heating" => [
                 "Floor Heating" => "1",
             ],
-            "shutter" => [
+            "cover" => [
                 "Up Channel" => "1",
                 "Down Channel" => "1",
             ],
-            "shutter_with_position" => [
+            "cover_with_position" => [
                 "Output Channel" => "1",
             ],
             "sensor" => [
