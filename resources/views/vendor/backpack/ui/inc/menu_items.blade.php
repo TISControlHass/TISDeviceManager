@@ -5,16 +5,16 @@
 <x-backpack::menu-dropdown title="Devices" icon="la la-clipboard-list">
     <x-backpack::menu-dropdown-item title="virtual devices" icon="la la-code" :link="backpack_url('virtual-device')" />
     <x-backpack::menu-dropdown-item title="Devices" icon="la la-server" :link="backpack_url('device')" />
-    <x-backpack::menu-dropdown-item title="Device types" icon="la la-clipboard-list" :link="backpack_url('device-type')" />
-    <x-backpack::menu-dropdown-item title="Default appliances" icon="la la-question" :link="backpack_url('default-appliance')" />
+    <!-- <x-backpack::menu-dropdown-item title="Device types" icon="la la-clipboard-list" :link="backpack_url('device-type')" /> -->
+    <!-- <x-backpack::menu-dropdown-item title="Default appliances" icon="la la-question" :link="backpack_url('default-appliance')" /> -->
 
 </x-backpack::menu-dropdown>
 
 <x-backpack::menu-dropdown title="Appliances" icon="la la-plug">
     <x-backpack::menu-dropdown-item title="Appliances" icon="la la-plug" :link="backpack_url('appliance')" />
     <x-backpack::menu-dropdown-item title="Appliance channels" icon="la la-link" :link="backpack_url('appliance-channels')" />
-    <x-backpack::menu-dropdown-item title="Appliance types" icon="la la-cogs" :link="backpack_url('appliance-type')" />
-    <x-backpack::menu-dropdown-item title="Default appliance channels" icon="la la-question" :link="backpack_url('default-appliance-channel')" />
+    <!-- <x-backpack::menu-dropdown-item title="Appliance types" icon="la la-cogs" :link="backpack_url('appliance-type')" /> -->
+    <!-- <x-backpack::menu-dropdown-item title="Default appliance channels" icon="la la-question" :link="backpack_url('default-appliance-channel')" /> -->
 
 </x-backpack::menu-dropdown>
 
