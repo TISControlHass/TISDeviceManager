@@ -8,7 +8,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\DefaultApplianceChannel;
 
-
 class DefaultApplianceChannelsSeeder extends Seeder
 {
     /**
@@ -48,9 +47,6 @@ class DefaultApplianceChannelsSeeder extends Seeder
             ],
             "cover_with_position" => [
                 "Output Channel" => "1",
-            ],
-            "sensor" => [
-                "Input Channel" => "1",
             ],
             "binary_sensor" => [
                 "Input Channel" => "1",
