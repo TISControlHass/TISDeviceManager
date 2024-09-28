@@ -4,15 +4,6 @@ FROM ${BUILD_FROM}
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Copy laravel files (zipped)
-COPY laravel.zip /
-# unzip
-RUN unzip /laravel.zip -d /
-# Remove the zip file
-RUN rm /laravel.zip
-# Copy and replace the .env file
-COPY .env /laravel/.env
-
 WORKDIR /laravel
 # Install PHP and extensions
 RUN apk add --no-cache \
@@ -41,27 +32,39 @@ RUN apk add --no-cache \
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Copy laravel files (zipped)
+# COPY laravel.zip /
+COPY . .
+# unzip
+# RUN unzip /laravel.zip -d /
+# Remove the zip file
+# RUN rm /laravel.zip
+# Copy and replace the .env file
+COPY .env.example .env
+
 
 # Remove temporary files
 RUN rm -f -r /tmp/*
-
+# remove storage link
+RUN rm -f -r /laravel/public/storage
 # Create SQLite database file
-RUN touch /laravel/database.sqlite
+RUN touch database.sqlite
 
 # Install Laravel dependencies
-RUN composer install
+# RUN composer install
+RUN composer du
 
 # Run Laravel migrations and clear caches
-RUN php artisan migrate \
-    && php artisan db:seed\
-    && php artisan cache:clear \
-    && php artisan config:clear \
-    && php artisan route:clear \
-    && php artisan view:clear \
-    && php artisan storage:link \
-    && php artisan config:cache \
-    && php artisan view:cache \
-    && php artisan route:cache
+RUN php artisan migrate
+RUN php artisan db:seed
+RUN php artisan cache:clear 
+RUN php artisan config:clear 
+RUN php artisan route:clear 
+RUN php artisan view:clear 
+RUN php artisan storage:link 
+RUN php artisan config:cache 
+RUN php artisan view:cache 
+RUN php artisan route:cache
 
 # Expose port 8000 for the artisan server
 EXPOSE 8000

@@ -1,0 +1,5 @@
+*.xlsx
+*.sqlite
+*.ipynb
+*.git
+*.env
