@@ -10,3 +10,7 @@ Homestead.json
 .phpunit.result.cache
 *.env
 *.sqlite
+*.xlsx
+*.ipynb
+*.devdbrc
+.vscode/
