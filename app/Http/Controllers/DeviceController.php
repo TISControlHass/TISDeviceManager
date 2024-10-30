@@ -50,6 +50,7 @@ class DeviceController extends Controller
                 try {
                     // Convert device_type_code array to a comma-separated string
                     $deviceTypeCodeStr = implode(',', $device['device_type_code']);
+                    $deviceTypeName = DeviceType::where('device_model_number', $device["device_type_code"])->first()->device_type_name;
 
                     if (in_array($deviceTypeCodeStr, DeviceType::all()->pluck('device_model_number')->toArray())) {
                         Device::updateOrCreate(
@@ -59,6 +60,7 @@ class DeviceController extends Controller
                             [
                                 'device_type' => DeviceType::where('device_model_number', $deviceTypeCodeStr)->first()->id,
                                 'gateway' => implode('.', $device['gateway']),
+                                'device_name' => $deviceTypeName . " " . $device['device_id'],
                             ]
                         );
                     } else {

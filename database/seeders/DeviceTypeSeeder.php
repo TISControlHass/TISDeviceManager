@@ -48,22 +48,22 @@ class DeviceTypeSeeder extends Seeder
                 [
                     'device_type_name' => 'RLY-4CH-10A',
                     'device_description' => 'Relay 4ch 10A',
-                    'device_model_number' => '26,168',
+                    'device_model_number' => '1,168',
                 ],
                 [
                     'device_type_name' => 'VLC-6CH-3A',
                     'device_description' => 'Valve Lighting Controler 6CH 3A',
-                    'device_model_number' => '26,170',
+                    'device_model_number' => '1,170',
                 ],
                 [
                     'device_type_name' => 'RLY-8CH-16A',
                     'device_description' => 'Relay 8ch 16A',
-                    'device_model_number' => '26,172',
+                    'device_model_number' => '1,172',
                 ],
                 [
                     'device_type_name' => 'VLC-12CH-10A',
                     'device_description' => 'Valve Lighting Controler 12CH 10A',
-                    'device_model_number' => '27,184',
+                    'device_model_number' => '1,184',
                 ],
                 [
                     'device_type_name' => 'DIM-6CH-2A',
@@ -78,7 +78,7 @@ class DeviceTypeSeeder extends Seeder
                 [
                     'device_type_name' => 'DIM-2CH-6A',
                     'device_description' => 'Dimmer 2CH 6A',
-                    'device_model_number' => '37,90',
+                    'device_model_number' => '2,90',
                 ],
                 [
                     'device_type_name' => 'TIS-AUT-TMR',
@@ -88,12 +88,12 @@ class DeviceTypeSeeder extends Seeder
                 [
                     'device_type_name' => 'IP-COM-PORT-OLD',
                     'device_description' => 'IP COM PORT GATEWAY',
-                    'device_model_number' => '75,177',
+                    'device_model_number' => '4,177',
                 ],
                 [
                     'device_type_name' => 'TIS-SEC-SM',
                     'device_description' => 'SECURITY MODULE',
-                    'device_model_number' => '190,233',
+                    'device_model_number' => '11,233',
                 ],
                 [
                     'device_type_name' => 'TER-4G',

@@ -14,20 +14,23 @@ class ApplianceTypeSeeder extends Seeder
     {
         $TIS_APPLIANCES = [
             "switch",
-            "light",
+            "dimmer",
             "rgbw",
             "rgb",
             "ac",
             "floor_heating",
-            "cover",
-            "cover_with_position",
+            "shutter",
+            "motor",
             "binary_sensor",
-            "select",
+            "security",
             "noise_sensor",
             "eco2_sensor",
             "tvoc_sensor",
             "humidity_sensor",
             "co_sensor",
+            "lux_sensor",
+            "temperature_sensor",
+            "weather",
         ];
 
         // first empty the table

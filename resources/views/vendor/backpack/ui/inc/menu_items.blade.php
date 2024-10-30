@@ -3,7 +3,7 @@
         {{ trans('backpack::base.dashboard') }}</a></li>
 
 <x-backpack::menu-dropdown title="Devices" icon="la la-clipboard-list">
-    <x-backpack::menu-dropdown-item title="virtual devices" icon="la la-code" :link="backpack_url('virtual-device')" />
+    {{-- <x-backpack::menu-dropdown-item title="virtual devices" icon="la la-code" :link="backpack_url('virtual-device')" /> --}}
     <x-backpack::menu-dropdown-item title="Devices" icon="la la-server" :link="backpack_url('device')" />
     <!-- <x-backpack::menu-dropdown-item title="Device types" icon="la la-clipboard-list" :link="backpack_url('device-type')" /> -->
     <!-- <x-backpack::menu-dropdown-item title="Default appliances" icon="la la-question" :link="backpack_url('default-appliance')" /> -->

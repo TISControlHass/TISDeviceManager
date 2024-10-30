@@ -19,18 +19,16 @@ class DefaultApplianceChannelsSeeder extends Seeder
             "switch" => [
                 "Output Channel" => "1",
             ],
-            "light" => [
+            "dimmer" => [
                 "Output Channel" => "1",
             ],
             "rgbw" => [
-                "Output Channel" => "1",
                 "Red Channel" => "1",
                 "Green Channel" => "1",
                 "Blue Channel" => "1",
                 "White Channel" => "1",
             ],
             "rgb" => [
-                "Output Channel" => "1",
                 "Red Channel" => "1",
                 "Green Channel" => "1",
                 "Blue Channel" => "1",
@@ -41,19 +39,28 @@ class DefaultApplianceChannelsSeeder extends Seeder
             "floor_heating" => [
                 "Floor Heating" => "1",
             ],
-            "cover" => [
+            "shutter" => [
                 "Up Channel" => "1",
                 "Down Channel" => "1",
             ],
-            "cover_with_position" => [
+            "motor" => [
                 "Output Channel" => "1",
             ],
             "binary_sensor" => [
                 "Input Channel" => "1",
             ],
-            "select" => [
+            "security" => [
                 "Input Channel" => "1",
             ],
+
+            "noise_sensor" => ["Input Channel" => "1"],
+            "eco2_sensor" => ["Input Channel" => "1"],
+            "tvoc_sensor" => ["Input Channel" => "1"],
+            "humidity_sensor" => ["Input Channel" => "1"],
+            "co_sensor" => ["Input Channel" => "1"],
+            "lux_sensor" => ["Input Channel" => "1"],
+            "temperature_sensor" => ["Input Channel" => "1"],
+            "weather" => ["Input Channel" => "1"],
         ];
         // truncate the table
         DefaultApplianceChannel::truncate();

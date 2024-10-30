@@ -46,7 +46,7 @@
 </head>
 
 <body>
-    <div class="container">
+    {{-- <div class="container">
         <h1>Device Manager Manual</h1>
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -208,7 +208,7 @@
                 <!-- Add steps here -->
             </div>
         </div>
-    </div>
+    </div> --}}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>

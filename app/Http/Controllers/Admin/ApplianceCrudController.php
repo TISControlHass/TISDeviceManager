@@ -68,6 +68,20 @@ class ApplianceCrudController extends CrudController
             'attribute' => 'device_name',
             'model' => \App\Models\Device::class,
         ]);
+        // remove appliance class
+        CRUD::removeField('appliance_class');
+        CRUD::removeField('is_protected');
+        $rules = [
+            'appliance_name' => 'required',
+            'device_id' => 'required',
+            'appliance_type' => 'required',
+        ];
+        $messages = [
+            'appliance_name.required' => 'The appliance name field is required.',
+            'device_id.required' => 'The device field is required.',
+            'appliance_type.required' => 'The appliance type field is required.',
+        ];
+        $this->crud->setValidation($rules, $messages);
     }
 
     /**
